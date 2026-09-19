@@ -28,11 +28,12 @@ A product list with pagination stored in the URL, plus a three-step "Add product
 | Forms           | TanStack Form                                                               |
 | Validation      | Zod 4                                                                       |
 | URL state       | nuqs 2                                                                      |
+| Tests           | Vitest, React Testing Library, jsdom                                        |
 | Package manager | pnpm                                                                        |
 
 ## Getting started
 
-**Requirements:** Node.js 20.9 or newer, pnpm (e.g. via `corepack enable`).
+**Requirements:** Node.js 22.22+ or 24.15+, pnpm (e.g. via `corepack enable`). The app alone runs on Node.js 20.9+, but the test tools (Vitest 5, jsdom 30) need a newer version.
 
 ```bash
 git clone https://github.com/Lukols-Dev/next16-tanstackForm-shadcn.git
@@ -49,8 +50,21 @@ The app runs at [http://localhost:3000](http://localhost:3000).
 | ---------------- | ------------------------------------------------------ |
 | `pnpm build`     | production build                                       |
 | `pnpm start`     | run the production build (after `pnpm build`)          |
+| `pnpm test`      | run all tests once                                     |
 | `pnpm typecheck` | TypeScript type check                                  |
 | `pnpm format`    | format the code (Prettier with Tailwind class sorting) |
+
+### Tests
+
+The tests use Vitest with React Testing Library in jsdom, so they need neither a browser nor a running server. After `pnpm install`:
+
+```bash
+pnpm test                               # run the whole suite once
+pnpm exec vitest                        # watch mode: re-runs tests on file changes
+pnpm exec vitest run features/products  # only test files whose path matches
+```
+
+Test files sit next to the code they cover (`*.test.ts`, `*.test.tsx`). The configuration is in `vitest.config.mts` and `vitest.setup.ts`.
 
 ## Project structure
 
