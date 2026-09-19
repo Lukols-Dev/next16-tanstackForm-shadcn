@@ -1,5 +1,6 @@
 export * from "./model/catalogs"
 export { productSchema, type Product } from "./model/product"
 export { formatPrice } from "./lib/format"
+export { grossToNet, netToGross, roundMoney } from "./lib/price"
 export { AvailabilityBadge } from "./ui/availability-badge"
 export { StockLevel } from "./ui/stock-level"
