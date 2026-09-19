@@ -3,7 +3,7 @@
 A product list with pagination stored in the URL, plus a three-step "Add product" form in a dialog. The UI follows the Figma design, including the mobile layout.
 
 - **Repository:** [https://github.com/Lukols-Dev/next16-tanstackForm-shadcn](https://github.com/Lukols-Dev/next16-tanstackForm-shadcn)
-- **Live demo:**
+- **Live demo:** [https://next16-tanstack-form-shadcn.vercel.app/](https://next16-tanstack-form-shadcn.vercel.app/)
 
 ## Features
 
