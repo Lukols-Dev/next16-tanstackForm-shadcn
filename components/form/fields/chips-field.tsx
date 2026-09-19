@@ -43,7 +43,7 @@ export function ChipsField<T extends string>({
             nativeButton
             render={<button type="button" />}
             aria-invalid={controlProps["aria-invalid"]}
-            className="inline-flex h-6 items-center gap-1 rounded-full border px-2 text-sm text-muted-foreground transition-colors outline-none hover:bg-muted focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 aria-invalid:border-destructive data-checked:border-primary data-checked:bg-primary data-checked:text-primary-foreground"
+            className="inline-flex h-6 items-center gap-1 rounded-full border px-2 text-sm text-muted-foreground transition-colors outline-none not-data-checked:hover:bg-muted focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 aria-invalid:border-destructive data-checked:border-primary data-checked:bg-primary data-checked:text-primary-foreground data-checked:hover:bg-primary/80"
           >
             <CheckboxPrimitive.Indicator className="[&>svg]:size-3">
               <CheckIcon />
