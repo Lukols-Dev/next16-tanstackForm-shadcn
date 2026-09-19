@@ -31,7 +31,7 @@ export function ProductCard({ product }: { product: Product }) {
         </CardAction>
       </CardHeader>
       <CardContent>
-        <dl className="grid grid-cols-3 gap-1 rounded-md bg-muted p-3">
+        <dl className="grid grid-cols-3 gap-1 rounded-[9px] bg-muted p-3">
           <CardDetail label={m.category}>{product.category}</CardDetail>
           <CardDetail label={m.priceGross}>
             <span className="font-medium tabular-nums">

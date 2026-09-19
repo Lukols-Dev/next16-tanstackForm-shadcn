@@ -19,7 +19,7 @@ type ProductsTableProps = { products: readonly Product[]; footer: ReactNode }
 
 export function ProductsTable({ products, footer }: ProductsTableProps) {
   return (
-    <Card className="gap-0 py-0 shadow-xs">
+    <Card className="gap-0 py-0 shadow-xs rounded-[10px]">
       <Table className="table-fixed">
         <TableHeader className="bg-muted/50">
           <TableRow className="hover:bg-transparent">
