@@ -1,24 +1,24 @@
-import type { ReactNode, Ref } from "react"
+import type { ReactNode } from "react"
 
 import { FieldGroup } from "@/components/ui/field"
 
 type StepFormProps = {
-  ref?: Ref<HTMLFormElement>
-  onSubmit: () => void
+  onSubmit: () => Promise<void>
   footer: ReactNode
   children: ReactNode
 }
 
-export function StepForm({ ref, onSubmit, footer, children }: StepFormProps) {
+export function StepForm({ onSubmit, footer, children }: StepFormProps) {
   return (
     <form
-      ref={ref}
       noValidate
       className="flex min-h-0 flex-1 flex-col"
-      onSubmit={(event) => {
+      onSubmit={async (event) => {
         event.preventDefault()
         event.stopPropagation()
-        onSubmit()
+        const form = event.currentTarget
+        await onSubmit()
+        focusFirstInvalid(form)
       }}
     >
       <div
@@ -32,8 +32,8 @@ export function StepForm({ ref, onSubmit, footer, children }: StepFormProps) {
   )
 }
 
-export function focusFirstInvalid(form: HTMLFormElement | null) {
+function focusFirstInvalid(form: HTMLFormElement) {
   requestAnimationFrame(() => {
-    form?.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus()
+    form.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus()
   })
 }

@@ -1,25 +1,33 @@
 import { plural, type PluralForms } from "@/lib/plural"
 
-const productForms: PluralForms = { one: "produkt", few: "produkty", many: "produktów" }
+const productForms: PluralForms = {
+  one: "produkt",
+  few: "produkty",
+  many: "produktów",
+}
 
 export const products = {
-    title: "Produkty",
-    count: (n: number) => `${n} ${plural(n, productForms)} w katalogu`,
-    add: "Dodaj produkt",
-    columns: {
-        name: "Nazwa", sku: "SKU", category: "Kategoria",
-        priceGross: "Cena Brutto", status: "Status", stock: "Magazyn",
-    },
-    card: { category: "Kategoria", priceGross: "Cena brutto", stock: "Magazyn" },
-    status: { available: "Dostępny", unavailable: "Niedostępny" },
-    stock: { unlimited: "Bez limitu", none: "Brak na stanie" },
-    pagination: {
-        summary: (page: number, total: number, count: number) =>
-            `Strona ${page} z ${total} · ${count} ${plural(count, productForms)}`,
-        prev: "Wstecz", next: "Dalej",
-        label: "Paginacja",
-    },
-    empty: "Brak produktów w katalogu",
-    loading: "Ładowanie listy produktów",
-    toast: { created: "Produkt został dodany" },
+  title: "Produkty",
+  count: (n: number) => `${n} ${plural(n, productForms)} w katalogu`,
+  add: "Dodaj produkt",
+  columns: {
+    name: "Nazwa",
+    sku: "SKU",
+    category: "Kategoria",
+    priceGross: "Cena Brutto",
+    status: "Status",
+    stock: "Magazyn",
+  },
+  card: { category: "Kategoria", priceGross: "Cena brutto", stock: "Magazyn" },
+  status: { available: "Dostępny", unavailable: "Niedostępny" },
+  stock: { unlimited: "Bez limitu" },
+  pagination: {
+    summary: (page: number, total: number, count: number) =>
+      `Strona ${page} z ${total} · ${count} ${plural(count, productForms)}`,
+    prev: "Wstecz",
+    next: "Dalej",
+    label: "Paginacja",
+  },
+  loading: "Ładowanie listy produktów",
+  toast: { created: "Produkt został dodany" },
 } as const

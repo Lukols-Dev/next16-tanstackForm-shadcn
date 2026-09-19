@@ -25,7 +25,7 @@ export function WizardFooter({
           variant="outline"
           size="lg"
           className={cn(
-            "mr-auto bg-transparent px-3.75 has-data-[icon=inline-start]:pl-3.75 dark:bg-transparent",
+            "mr-auto bg-transparent px-3.75 has-data-[icon=inline-start]:pl-3.75",
             backButtonClassName
           )}
           onClick={onBack}

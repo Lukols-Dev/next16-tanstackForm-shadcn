@@ -1,16 +1,17 @@
-import { Geist, Geist_Mono } from "next/font/google"
+import type { Metadata } from "next"
+import { Geist } from "next/font/google"
 
 import "./globals.css"
 import { APP_LOCALE } from "@/lib/locale"
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
+import { messages } from "@/messages"
 import { Providers } from "@/providers"
 
-const geist = Geist({ subsets: ['latin'], variable: '--font-sans' })
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" })
 
-const fontMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-})
+export const metadata: Metadata = {
+  title: messages.products.title,
+}
 
 export default function RootLayout({
   children,
@@ -20,8 +21,7 @@ export default function RootLayout({
   return (
     <html
       lang={APP_LOCALE}
-      suppressHydrationWarning
-      className={cn("antialiased", fontMono.variable, "font-sans", geist.variable)}
+      className={cn("font-sans antialiased", geist.variable)}
     >
       <body>
         <Providers>{children}</Providers>

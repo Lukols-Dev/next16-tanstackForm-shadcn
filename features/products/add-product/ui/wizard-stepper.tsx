@@ -3,26 +3,28 @@ import { CheckIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { messages } from "@/messages"
 
-import { STEPS } from "../model/steps"
+import { STEPS, type StepId } from "../model/steps"
 
 const m = messages.productForm
 
-function isConnectorActive(index: number, currentStep: number) {
-  return index <= currentStep && index < STEPS.length - 1
+function isConnectorActive(index: number, currentIndex: number) {
+  return index <= currentIndex && index < STEPS.length - 1
 }
 
-export function WizardStepper({ currentStep }: { currentStep: number }) {
+export function WizardStepper({ currentStep }: { currentStep: StepId }) {
+  const currentIndex = STEPS.indexOf(currentStep)
+
   return (
     <div className="mx-4 shrink-0 border-b py-6 md:mx-0 md:flex md:h-15.5 md:items-center md:px-4 md:py-0">
       <ol className="grid grid-cols-3 gap-x-4 md:flex md:items-center">
         {STEPS.map((step, index) => {
-          const isComplete = index < currentStep
-          const isUpcoming = index > currentStep
+          const isComplete = index < currentIndex
+          const isUpcoming = index > currentIndex
 
           return (
             <li
               key={step}
-              aria-current={index === currentStep ? "step" : undefined}
+              aria-current={step === currentStep ? "step" : undefined}
               className="md:flex md:items-center md:gap-4"
             >
               {index > 0 && (
@@ -30,7 +32,7 @@ export function WizardStepper({ currentStep }: { currentStep: number }) {
                   aria-hidden="true"
                   className={cn(
                     "hidden h-px w-17 md:block",
-                    isConnectorActive(index, currentStep)
+                    isConnectorActive(index, currentIndex)
                       ? "bg-primary"
                       : "bg-border"
                   )}
@@ -73,8 +75,8 @@ export function WizardStepper({ currentStep }: { currentStep: number }) {
         })}
       </ol>
       <p className="sr-only" aria-live="polite">
-        {m.progress(currentStep + 1, STEPS.length)}:{" "}
-        {m.steps[STEPS[currentStep]].title}
+        {m.progress(currentIndex + 1, STEPS.length)}:{" "}
+        {m.steps[currentStep].title}
       </p>
     </div>
   )

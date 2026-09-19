@@ -1,5 +1,3 @@
-import { useRef } from "react"
-
 import { FieldRow, withForm, type SelectOption } from "@/components/form"
 import {
   CURRENCIES,
@@ -9,11 +7,12 @@ import {
   type Currency,
   type VatRate,
 } from "@/entities/product"
+import { MONEY_INPUT_LOCALE } from "@/lib/locale"
 import { messages } from "@/messages"
 
 import { pricingSchema } from "../../model/schemas"
 import { productFormOptions } from "../form-options"
-import { focusFirstInvalid, StepForm } from "../step-form"
+import { StepForm } from "../step-form"
 import { WizardFooter } from "../wizard-footer"
 
 const m = messages.productForm.fields
@@ -26,7 +25,11 @@ const CURRENCY_OPTIONS: SelectOption<Currency>[] = CURRENCIES.map((value) => ({
   value,
   label: value,
 }))
-const MONEY_FORMAT = { minimumFractionDigits: 2, maximumFractionDigits: 2 }
+const MONEY_FORMAT = {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+  useGrouping: false,
+}
 
 const DERIVED = {
   dontRunListeners: true,
@@ -38,19 +41,15 @@ export const PricingStep = withForm({
   ...productFormOptions,
   props: {} as { onNext: () => void; onBack: () => void },
   render: function PricingStep({ form, onNext, onBack }) {
-    const formRef = useRef<HTMLFormElement>(null)
-
     return (
       <form.FormGroup
         name="pricing"
         validators={{ onChange: pricingSchema }}
         onGroupSubmit={onNext}
-        onGroupSubmitInvalid={() => focusFirstInvalid(formRef.current)}
       >
         {(group) => (
           <StepForm
-            ref={formRef}
-            onSubmit={() => void group.handleSubmit()}
+            onSubmit={() => group.handleSubmit()}
             footer={
               <WizardFooter
                 isLastStep={false}
@@ -78,6 +77,7 @@ export const PricingStep = withForm({
                   <field.NumberInputField
                     label={m.priceNet.label}
                     placeholder={m.priceNet.placeholder}
+                    locale={MONEY_INPUT_LOCALE}
                     format={MONEY_FORMAT}
                     inputMode="decimal"
                   />
@@ -101,6 +101,7 @@ export const PricingStep = withForm({
                   <field.NumberInputField
                     label={m.priceGross.label}
                     placeholder={m.priceGross.placeholder}
+                    locale={MONEY_INPUT_LOCALE}
                     format={MONEY_FORMAT}
                     inputMode="decimal"
                   />

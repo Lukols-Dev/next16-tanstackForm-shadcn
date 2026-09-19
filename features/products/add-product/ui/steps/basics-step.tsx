@@ -1,4 +1,4 @@
-import { useMemo, useRef } from "react"
+import { useMemo } from "react"
 
 import { FieldRow, withForm, type SelectOption } from "@/components/form"
 import {
@@ -12,7 +12,7 @@ import { messages } from "@/messages"
 
 import { createBasicsSchema } from "../../model/schemas"
 import { productFormOptions } from "../form-options"
-import { focusFirstInvalid, StepForm } from "../step-form"
+import { StepForm } from "../step-form"
 import { WizardFooter } from "../wizard-footer"
 
 const m = messages.productForm.fields
@@ -33,19 +33,15 @@ export const BasicsStep = withForm({
       () => createBasicsSchema(existingSkus),
       [existingSkus]
     )
-    const formRef = useRef<HTMLFormElement>(null)
-
     return (
       <form.FormGroup
         name="basics"
         validators={{ onChange: schema }}
         onGroupSubmit={onNext}
-        onGroupSubmitInvalid={() => focusFirstInvalid(formRef.current)}
       >
         {(group) => (
           <StepForm
-            ref={formRef}
-            onSubmit={() => void group.handleSubmit()}
+            onSubmit={() => group.handleSubmit()}
             footer={<WizardFooter isLastStep={false} />}
           >
             <FieldRow>

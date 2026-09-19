@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react"
 import { useAppForm } from "@/components/form"
 import type { Product } from "@/entities/product"
 
+import type { StepId } from "../model/steps"
 import { toProduct } from "../model/to-product"
 import { productFormOptions } from "./form-options"
 import { AvailabilityStep } from "./steps/availability-step"
@@ -19,7 +20,7 @@ type ProductWizardProps = {
 }
 
 export function ProductWizard({ existingSkus, onCreated }: ProductWizardProps) {
-  const [step, setStep] = useState(0)
+  const [step, setStep] = useState<StepId>("basics")
   const isCreated = useRef(false)
   const stepsRef = useRef<HTMLDivElement>(null)
   const previousStep = useRef(step)
@@ -43,22 +44,22 @@ export function ProductWizard({ existingSkus, onCreated }: ProductWizardProps) {
     <>
       <WizardStepper currentStep={step} />
       <div ref={stepsRef} className="contents">
-        {step === 0 && (
+        {step === "basics" && (
           <BasicsStep
             form={form}
             existingSkus={existingSkus}
-            onNext={() => setStep(1)}
+            onNext={() => setStep("pricing")}
           />
         )}
-        {step === 1 && (
+        {step === "pricing" && (
           <PricingStep
             form={form}
-            onBack={() => setStep(0)}
-            onNext={() => setStep(2)}
+            onBack={() => setStep("basics")}
+            onNext={() => setStep("availability")}
           />
         )}
-        {step === 2 && (
-          <AvailabilityStep form={form} onBack={() => setStep(1)} />
+        {step === "availability" && (
+          <AvailabilityStep form={form} onBack={() => setStep("pricing")} />
         )}
       </div>
     </>

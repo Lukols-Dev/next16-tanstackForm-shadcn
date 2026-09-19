@@ -33,7 +33,7 @@ export function AddProductDialog({
   const [open, setOpen] = useState(false)
 
   return (
-    <Dialog open={open} onOpenChange={setOpen} >
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger render={<Button size="lg" className="shrink-0 px-4" />}>
         <PlusIcon />
         {messages.products.add}

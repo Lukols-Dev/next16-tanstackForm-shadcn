@@ -1,5 +1,3 @@
-import { useRef } from "react"
-
 import { FieldRow, withForm } from "@/components/form"
 import { FieldLegend, FieldSet } from "@/components/ui/field"
 import { Separator } from "@/components/ui/separator"
@@ -7,7 +5,7 @@ import { messages } from "@/messages"
 
 import { availabilitySchema } from "../../model/schemas"
 import { productFormOptions } from "../form-options"
-import { focusFirstInvalid, StepForm } from "../step-form"
+import { StepForm } from "../step-form"
 import { WizardFooter } from "../wizard-footer"
 
 const m = messages.productForm.fields
@@ -16,8 +14,6 @@ export const AvailabilityStep = withForm({
   ...productFormOptions,
   props: {} as { onBack: () => void },
   render: function AvailabilityStep({ form, onBack }) {
-    const formRef = useRef<HTMLFormElement>(null)
-
     return (
       <form.FormGroup
         name="availability"
@@ -25,12 +21,10 @@ export const AvailabilityStep = withForm({
         onGroupSubmit={async ({ groupApi }) => {
           await groupApi.form.handleSubmit()
         }}
-        onGroupSubmitInvalid={() => focusFirstInvalid(formRef.current)}
       >
         {(group) => (
           <StepForm
-            ref={formRef}
-            onSubmit={() => void group.handleSubmit()}
+            onSubmit={() => group.handleSubmit()}
             footer={
               <WizardFooter
                 isLastStep
